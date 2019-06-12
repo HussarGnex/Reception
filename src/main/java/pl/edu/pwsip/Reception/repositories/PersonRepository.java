@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repozytorium osoby, odpowiada za komunikację aplikacji z bazą danych MongoDB
+ */
 public interface PersonRepository extends MongoRepository<Person, String> {
 
     Optional<List<Person>> findByName(String name);

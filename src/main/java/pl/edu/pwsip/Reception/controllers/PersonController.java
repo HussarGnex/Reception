@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Kontroler osoby, odpowiada za obsługę zapytań HTTP
+ */
 @RestController
 public class PersonController {
 
@@ -24,11 +27,6 @@ public class PersonController {
     public Person addPerson(@RequestBody Person person) {
         return personRepository.save(person);
     }
-
-//    @PostMapping("/persons")
-//    public List<Person> addPersons(@RequestBody List<Person> persons) {
-//        return personRepository.saveAll(persons);
-//    }
 
     @DeleteMapping("/persons/{idPerson}")
     public void deletePerson(@PathVariable String idPerson) {
@@ -49,23 +47,17 @@ public class PersonController {
     @GetMapping("/persons/search")
     public List<Person> getAllPersonsBy(@RequestParam String by, @RequestParam String what) {
         if(by.equals("name"))
-            return personRepository.findByName(what)
-                    .orElse(new ArrayList<>());
+            return personRepository.findByName(what).orElseGet(() -> new ArrayList<>());
         if(by.equals("surname"))
-            return personRepository.findBySurname(what)
-                    .orElse(new ArrayList<>());
+            return personRepository.findBySurname(what).orElseGet(() -> new ArrayList<>());
         if(by.equals("birthdate"))
-            return personRepository.findByBirthDate(LocalDate.parse(what))
-                    .orElse(new ArrayList<>());
+            return personRepository.findByBirthDate(LocalDate.parse(what)).orElseGet(() -> new ArrayList<>());
         if(by.equals("role"))
-            return personRepository.findByRole(what)
-                    .orElse(new ArrayList<>());
+            return personRepository.findByRole(what).orElseGet(() -> new ArrayList<>());
         if(by.equals("patient"))
-            return personRepository.findByPatients(what)
-                    .orElse(new ArrayList<>());
+            return personRepository.findByPatients(what).orElseGet(() -> new ArrayList<>());
         if(by.equals("visit"))
-            return personRepository.findByVisits(what)
-                    .orElse(new ArrayList<>());
+            return personRepository.findByVisits(what).orElseGet(() -> new ArrayList<>());
         return new ArrayList<>();
     }
 

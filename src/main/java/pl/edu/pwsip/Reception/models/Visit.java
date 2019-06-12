@@ -4,6 +4,9 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
+/**
+ * Model wizyty
+ */
 public class Visit {
 
     @Id private String id;
